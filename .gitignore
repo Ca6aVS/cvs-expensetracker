@@ -1,0 +1,6 @@
+# .NET build
+bin/
+obj/
+
+# Rider IDE
+.idea/
