@@ -33,7 +33,22 @@ public class ResultTests
     }
     
     [Fact]
-    public void ResultGeneric_ImplicitOperator_Should_MakeSuccessfulResultWithValue()
+    public void Result_ImplicitOperatorOnError_Should_MakeFailedResultWithError()
+    {
+        // Arrange
+        var error = new Error("Error Code", "Error Message");
+        
+        // Act
+        Result result = error;
+        
+        // Assert
+        result.IsSuccess.Should().BeFalse();
+        result.IsFailure.Should().BeTrue();
+        result.Error.Should().Be(error);
+    }
+    
+    [Fact]
+    public void ResultGeneric_ImplicitOperatorOnValue_Should_MakeSuccessfulResultWithValue()
     {
         // Arrange
         const string value = "Result Value";
@@ -57,6 +72,26 @@ public class ResultTests
         
         // Act
         var result = Result<string>.Failure(error);
+        
+        // Assert
+        result.IsSuccess.Should().BeFalse();
+        result.IsFailure.Should().BeTrue();
+        result.Error.Should().Be(error);
+        
+        result.Invoking(r => r.Value)
+            .Should()
+            .Throw<InvalidOperationException>()
+            .WithMessage("Cannot access value on a failed Result.");
+    }
+    
+    [Fact]
+    public void ResultGeneric_ImplicitOperatorOnError_Should_MakeFailedResultWithError()
+    {
+        // Arrange
+        var error = new Error("Error Code", "Error Message");
+        
+        // Act
+        Result<string> result = error;
         
         // Assert
         result.IsSuccess.Should().BeFalse();
