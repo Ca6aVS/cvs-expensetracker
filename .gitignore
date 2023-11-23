@@ -5,5 +5,8 @@ obj/
 # Rider IDE
 .idea/
 
+# Visual Studio IDE
+.vs/
+
 # User-specific settings
 *.sln.DotSettings.user
