@@ -4,9 +4,10 @@ obj/
 
 # Rider IDE
 .idea/
+*.sln.DotSettings.user
 
 # Visual Studio IDE
 .vs/
 
-# User-specific settings
-*.sln.DotSettings.user
+# Test results
+**/TestResults/
