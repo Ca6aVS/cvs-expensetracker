@@ -23,9 +23,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{DFF8A72D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CabaVS.ExpenseTracker.UnitTests", "tests\CabaVS.ExpenseTracker.UnitTests\CabaVS.ExpenseTracker.UnitTests.csproj", "{2E4AEEB9-D1C7-428F-BD40-CE90BA6D712D}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{19B0D8A9-1878-4E25-AD9B-48415B4D7F23}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{2393054E-F745-4BAF-B715-F8751E282527}"
 	ProjectSection(SolutionItems) = preProject
-		.gitignore = .gitignore
+		scripts\cvs-unittests.ps1 = scripts\cvs-unittests.ps1
 	EndProjectSection
 EndProject
 Global
