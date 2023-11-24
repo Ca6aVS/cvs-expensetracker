@@ -47,4 +47,31 @@ public class CurrencyCodeTests
         result.IsFailure.Should().BeTrue();
         result.Error.Should().Be(CurrencyCodeErrors.TooLong(currencyCode.Length));
     }
+
+    [Fact]
+    public void CurrencyCode_Should_BeEqual_WhenValuesAreSame()
+    {
+        // Arrange
+        const string value = "USD";
+
+        var one = CurrencyCode.Create(value).Value;
+        var two = CurrencyCode.Create(value).Value;
+
+        var oneAsObj = (object)one;
+        var twoAsObj = (object)two;
+        
+        // Act
+        var equalsByMethod = one.Equals(two);
+        var equalsByMethodAsObject = oneAsObj.Equals(twoAsObj);
+        var equalsByHashCode = one.GetHashCode() == two.GetHashCode();
+        var equalsByOperator = one == two;
+        var notEqualsByOperator = one != two;
+        
+        // Assert
+        equalsByMethod.Should().BeTrue();
+        equalsByMethodAsObject.Should().BeTrue();
+        equalsByHashCode.Should().BeTrue();
+        equalsByOperator.Should().BeTrue();
+        notEqualsByOperator.Should().BeFalse();
+    }
 }

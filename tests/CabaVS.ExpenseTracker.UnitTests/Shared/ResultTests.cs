@@ -46,6 +46,28 @@ public class ResultTests
         result.IsFailure.Should().BeTrue();
         result.Error.Should().Be(error);
     }
+
+    [Fact]
+    public void Result_Should_ThrowException_WhenSuccessAndErrorProvided()
+    {
+        // Arrange
+        const bool isSuccess = true;
+        var error = new Error("Error Code", "Error Message");
+        
+        // Act & Assert
+        Assert.Throws<InvalidOperationException>(() => _ = new DummyResult(isSuccess, error));
+    }
+    
+    [Fact]
+    public void Result_Should_ThrowException_WhenFailureAndErrorIsNone()
+    {
+        // Arrange
+        const bool isSuccess = false;
+        var error = Error.None;
+        
+        // Act & Assert
+        Assert.Throws<InvalidOperationException>(() => _ = new DummyResult(isSuccess, error));
+    }
     
     [Fact]
     public void ResultGeneric_ImplicitOperatorOnValue_Should_MakeSuccessfulResultWithValue()
@@ -103,4 +125,6 @@ public class ResultTests
             .Throw<InvalidOperationException>()
             .WithMessage("Cannot access value on a failed Result.");
     }
+    
+    private class DummyResult(bool isSuccess, Error error) : Result(isSuccess, error);
 }

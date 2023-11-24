@@ -86,6 +86,42 @@ public class ValueObjectTests
         notEqualsByOperator.Should().BeTrue();
     }
     
+    [Fact]
+    public void ValueObject_ShouldNot_BeEqual_WhenOtherIsNull()
+    {
+        // Arrange
+        var valueObject = new ValueObjectOne("Value");
+        var valueObjectAsObject = (object)valueObject;
+        
+        // Act
+        var equalsByMethod = valueObject.Equals(null);
+        var equalsByMethodAsObj = valueObjectAsObject.Equals(null);
+        var equalsByOperator = valueObject == null;
+        var notEqualsByOperator = valueObject != null;
+        
+        // Assert
+        equalsByMethod.Should().BeFalse();
+        equalsByMethodAsObj.Should().BeFalse();
+        equalsByOperator.Should().BeFalse();
+        notEqualsByOperator.Should().BeTrue();
+    }
+
+    [Fact]
+    public void ValueObject_ShouldNot_BeEqual_WhenBothAreNull()
+    {
+        // Arrange
+        ValueObjectOne? one = null;
+        ValueObjectOne? two = null;
+        
+        // Act
+        var equalsByOperator = one == two;
+        var notEqualsByOperator = one != two;
+        
+        // Assert
+        equalsByOperator.Should().BeFalse();
+        notEqualsByOperator.Should().BeTrue();
+    }
+    
     private class ValueObjectOne : ValueObject
     {
         public string Value { get; }

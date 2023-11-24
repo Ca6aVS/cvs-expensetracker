@@ -87,6 +87,42 @@ public class EntityTests
         notEqualsByOperator.Should().BeTrue();
     }
     
+    [Fact]
+    public void ValueObject_ShouldNot_BeEqual_WhenOtherIsNull()
+    {
+        // Arrange
+        var entityOne = new DummyEntityOne(new Guid("D050624C-F7C8-44C8-A4D0-ED5F3CEED066"), "Prop", 0);
+        var entityOneAsObject = (object)entityOne;
+        
+        // Act
+        var equalsByMethod = entityOne.Equals(null);
+        var equalsByMethodAsObj = entityOneAsObject.Equals(null);
+        var equalsByOperator = entityOne == null;
+        var notEqualsByOperator = entityOne != null;
+        
+        // Assert
+        equalsByMethod.Should().BeFalse();
+        equalsByMethodAsObj.Should().BeFalse();
+        equalsByOperator.Should().BeFalse();
+        notEqualsByOperator.Should().BeTrue();
+    }
+
+    [Fact]
+    public void ValueObject_ShouldNot_BeEqual_WhenBothAreNull()
+    {
+        // Arrange
+        DummyEntityOne? one = null;
+        DummyEntityOne? two = null;
+        
+        // Act
+        var equalsByOperator = one == two;
+        var notEqualsByOperator = one != two;
+        
+        // Assert
+        equalsByOperator.Should().BeFalse();
+        notEqualsByOperator.Should().BeTrue();
+    }
+    
     private class DummyEntityOne : Entity
     {
         public string StringProp { get; }

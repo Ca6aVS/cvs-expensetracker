@@ -50,4 +50,31 @@ public class CurrencyNameTests
         result.IsFailure.Should().BeTrue();
         result.Error.Should().Be(CurrencyNameErrors.TooLong(currencyName.Length));
     }
+    
+    [Fact]
+    public void CurrencyName_Should_BeEqual_WhenValuesAreSame()
+    {
+        // Arrange
+        const string value = "Polish zloty";
+
+        var one = CurrencyName.Create(value).Value;
+        var two = CurrencyName.Create(value).Value;
+
+        var oneAsObj = (object)one;
+        var twoAsObj = (object)two;
+        
+        // Act
+        var equalsByMethod = one.Equals(two);
+        var equalsByMethodAsObject = oneAsObj.Equals(twoAsObj);
+        var equalsByHashCode = one.GetHashCode() == two.GetHashCode();
+        var equalsByOperator = one == two;
+        var notEqualsByOperator = one != two;
+        
+        // Assert
+        equalsByMethod.Should().BeTrue();
+        equalsByMethodAsObject.Should().BeTrue();
+        equalsByHashCode.Should().BeTrue();
+        equalsByOperator.Should().BeTrue();
+        notEqualsByOperator.Should().BeFalse();
+    }
 }

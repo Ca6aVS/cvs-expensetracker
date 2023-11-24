@@ -111,4 +111,63 @@ public class CurrencyTests
         result.IsFailure.Should().BeTrue();
         result.Error.Should().Be(CurrencySymbolErrors.TooLong(symbol.Length));
     }
+    
+    [Fact]
+    public void Currency_Should_UpdateName_WhenNameIsUnique()
+    {
+        // Arrange
+        var currency = Currency.Create(
+            new Guid("92B2394C-F757-49DC-AE45-3BB069B28EE5"),
+            CurrencyName.Create("Polish zloty").Value,
+            "PLN",
+            "zl",
+            true).Value;
+        var newCurrencyName = CurrencyName.Create("American dollar").Value;
+        
+        // Act
+        var result = currency.UpdateName(newCurrencyName, true);
+        
+        // Assert
+        result.IsSuccess.Should().BeTrue();
+    }
+    
+    [Fact]
+    public void Currency_Should_UpdateName_WhenNameIsSameRegardlessOfUniqueness()
+    {
+        // Arrange
+        const string currencyName = "Polish zloty";
+        var currency = Currency.Create(
+            new Guid("92B2394C-F757-49DC-AE45-3BB069B28EE5"),
+            CurrencyName.Create(currencyName).Value,
+            "PLN",
+            "zl",
+            true).Value;
+        var newCurrencyName = CurrencyName.Create(currencyName).Value;
+        
+        // Act
+        var result = currency.UpdateName(newCurrencyName, false);
+        
+        // Assert
+        result.IsSuccess.Should().BeTrue();
+    }
+    
+    [Fact]
+    public void Currency_ShouldNot_UpdateName_WhenNameIsNotUnique()
+    {
+        // Arrange
+        var currency = Currency.Create(
+            new Guid("92B2394C-F757-49DC-AE45-3BB069B28EE5"),
+            CurrencyName.Create("Polish zloty").Value,
+            "PLN",
+            "zl",
+            true).Value;
+        var newCurrencyName = CurrencyName.Create("American dollar").Value;
+        
+        // Act
+        var result = currency.UpdateName(newCurrencyName, false);
+        
+        // Assert
+        result.IsFailure.Should().BeTrue();
+        result.Error.Should().Be(CurrencyErrors.NameTaken(newCurrencyName));
+    }
 }
