@@ -13,7 +13,7 @@ if ($installedTool.Count -eq 0) {
 }
 
 Write-Host ">>> Running tests..."
-dotnet test .\CabaVS.ExpenseTracker.sln --collect:"XPlat Code Coverage" | Out-Null
+dotnet test .\tests\CabaVS.ExpenseTracker.UnitTests\CabaVS.ExpenseTracker.UnitTests.csproj --collect:"XPlat Code Coverage" | Out-Null
 
 Write-Host ">>> Generating HTML report..."
 reportgenerator -reports:./**/coverage.cobertura.xml -targetdir:$tempFolderPath -reporttypes:HtmlInline_AzurePipelines_Light | Out-Null
