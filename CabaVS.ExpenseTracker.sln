@@ -28,6 +28,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{2393
 		scripts\cvs-unittests.ps1 = scripts\cvs-unittests.ps1
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CabaVS.ExpenseTracker.ArchitectureTests", "tests\CabaVS.ExpenseTracker.ArchitectureTests\CabaVS.ExpenseTracker.ArchitectureTests.csproj", "{632D5816-46E1-46B7-B5C0-7E0FF2007A2A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +63,10 @@ Global
 		{2E4AEEB9-D1C7-428F-BD40-CE90BA6D712D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2E4AEEB9-D1C7-428F-BD40-CE90BA6D712D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2E4AEEB9-D1C7-428F-BD40-CE90BA6D712D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{632D5816-46E1-46B7-B5C0-7E0FF2007A2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{632D5816-46E1-46B7-B5C0-7E0FF2007A2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{632D5816-46E1-46B7-B5C0-7E0FF2007A2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{632D5816-46E1-46B7-B5C0-7E0FF2007A2A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{494F214B-79AB-4F7F-865D-28A83FC920AA} = {372EB581-2DAB-4673-B19E-CE9A4AA5D0EE}
@@ -71,5 +77,6 @@ Global
 		{0EDF8893-0808-47F1-84E2-5C1E2358CE2A} = {1237A73D-7F81-4008-8B89-481022B54A42}
 		{9B8DA7A0-F6DD-48A0-A991-8C1D12876780} = {372EB581-2DAB-4673-B19E-CE9A4AA5D0EE}
 		{2E4AEEB9-D1C7-428F-BD40-CE90BA6D712D} = {DFF8A72D-CADF-4115-BF07-3CD2842E0E9A}
+		{632D5816-46E1-46B7-B5C0-7E0FF2007A2A} = {DFF8A72D-CADF-4115-BF07-3CD2842E0E9A}
 	EndGlobalSection
 EndGlobal
