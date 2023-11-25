@@ -5,6 +5,8 @@ on:
   push:
     branches:
       - master
+    paths-ignore:
+      - 'scripts/**'
 
 env:
   DOTNET_VERSION: "8.0.x"
