@@ -25,7 +25,11 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\src\CabaVS.ExpenseTracker.API\CabaVS.ExpenseTracker.API.csproj" />
+      <ProjectReference Include="..\..\src\Core\CabaVS.ExpenseTracker.Application\CabaVS.ExpenseTracker.Application.csproj" />
       <ProjectReference Include="..\..\src\Core\CabaVS.ExpenseTracker.Domain\CabaVS.ExpenseTracker.Domain.csproj" />
+      <ProjectReference Include="..\..\src\External\CabaVS.ExpenseTracker.Infrastructure\CabaVS.ExpenseTracker.Infrastructure.csproj" />
+      <ProjectReference Include="..\..\src\External\CabaVS.ExpenseTracker.Presentation\CabaVS.ExpenseTracker.Presentation.csproj" />
     </ItemGroup>
 
 </Project>

@@ -1,5 +1,9 @@
+using CabaVS.ExpenseTracker.API;
+using CabaVS.ExpenseTracker.Application;
 using CabaVS.ExpenseTracker.Domain;
 using CabaVS.ExpenseTracker.Domain.Primitives;
+using CabaVS.ExpenseTracker.Infrastructure;
+using CabaVS.ExpenseTracker.Presentation;
 using FluentAssertions;
 using NetArchTest.Rules;
 
@@ -7,6 +11,22 @@ namespace CabaVS.ExpenseTracker.ArchitectureTests;
 
 public class DomainTests
 {
+    [Fact]
+    public void Domain_ShouldNot_HaveOtherDependencies()
+    {
+        // Arrange & Act
+        var result = Types.InAssembly(DomainAssemblyMarker.Assembly)
+            .ShouldNot().HaveDependencyOnAny(
+                typeof(ApplicationAssemblyMarker).Namespace, 
+                typeof(InfrastructureAssemblyMarker).Namespace,
+                typeof(PresentationAssemblyMarker).Namespace, 
+                typeof(ApiAssemblyMarker).Namespace)
+            .GetResult();
+        
+        // Assert
+        result.IsSuccessful.Should().BeTrue();
+    }
+    
     [Fact]
     public void Domain_DomainErrors_Should_BeStatic()
     {

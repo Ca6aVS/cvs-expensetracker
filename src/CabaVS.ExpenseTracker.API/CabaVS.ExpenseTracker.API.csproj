@@ -7,4 +7,11 @@
         <UserSecretsId>8fbf6889-463b-49a5-9527-87aa446b1187</UserSecretsId>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Core\CabaVS.ExpenseTracker.Application\CabaVS.ExpenseTracker.Application.csproj" />
+      <ProjectReference Include="..\Core\CabaVS.ExpenseTracker.Domain\CabaVS.ExpenseTracker.Domain.csproj" />
+      <ProjectReference Include="..\External\CabaVS.ExpenseTracker.Infrastructure\CabaVS.ExpenseTracker.Infrastructure.csproj" />
+      <ProjectReference Include="..\External\CabaVS.ExpenseTracker.Presentation\CabaVS.ExpenseTracker.Presentation.csproj" />
+    </ItemGroup>
+
 </Project>
