@@ -7,7 +7,7 @@ namespace CabaVS.ExpenseTracker.Domain.Entities;
 public sealed class Balance : Entity
 {
     public BalanceName Name { get; set; }
-    public decimal Amount { get; }
+    public decimal Amount { get; set; }
     public Currency Currency { get; }
     
     private Balance(Guid id, BalanceName name, decimal amount, Currency currency) : base(id)
