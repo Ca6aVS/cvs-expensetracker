@@ -27,4 +27,76 @@ public sealed class Balance : Entity
 
         return new Balance(id, nameResult.Value, amount, currency);
     }
+
+    public Result<TransferTransaction> CreateTransferTransactionTo(
+        Guid id,
+        DateOnly date,
+        IEnumerable<string> tags,
+        decimal sourceAmount,
+        Balance destination,
+        decimal? destinationAmount)
+    {
+        return TransferTransaction.Create(
+            id,
+            date,
+            tags,
+            this,
+            sourceAmount,
+            destination,
+            destinationAmount);
+    }
+    
+    public Result<TransferTransaction> CreateTransferTransactionFrom(
+        Guid id,
+        DateOnly date,
+        IEnumerable<string> tags,
+        Balance source,
+        decimal sourceAmount,
+        decimal? destinationAmount)
+    {
+        return TransferTransaction.Create(
+            id,
+            date,
+            tags,
+            source,
+            sourceAmount,
+            this,
+            destinationAmount);
+    }
+    
+    public Result<IncomeTransaction> CreateIncomeTransaction(
+        Guid id,
+        DateOnly date,
+        IEnumerable<string> tags,
+        Category source,
+        decimal sourceAmount,
+        decimal? destinationAmount)
+    {
+        return IncomeTransaction.Create(
+            id,
+            date,
+            tags,
+            source,
+            sourceAmount,
+            this,
+            destinationAmount);
+    }
+    
+    public Result<ExpenseTransaction> CreateExpenseTransaction(
+        Guid id,
+        DateOnly date,
+        IEnumerable<string> tags,
+        decimal sourceAmount,
+        Category destination,
+        decimal? destinationAmount)
+    {
+        return ExpenseTransaction.Create(
+            id,
+            date,
+            tags,
+            this,
+            sourceAmount,
+            destination,
+            destinationAmount);
+    }
 }
