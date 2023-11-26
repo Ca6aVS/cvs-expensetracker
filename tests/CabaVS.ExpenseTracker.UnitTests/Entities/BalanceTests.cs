@@ -12,7 +12,7 @@ public class BalanceTests
     {
         // Arrange
         var id = new Guid("92B2394C-F757-49DC-AE45-3BB069B28EE5");
-        const string name = "Groceries";
+        const string name = "Card of My Bank";
         const decimal amount = 10000m;
         var currency = Currency.Create(
             Guid.NewGuid(), 
