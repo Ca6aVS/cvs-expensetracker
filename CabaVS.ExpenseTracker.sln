@@ -26,6 +26,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{2393054E-F745-4BAF-B715-F8751E282527}"
 	ProjectSection(SolutionItems) = preProject
 		scripts\cvs-unittests.ps1 = scripts\cvs-unittests.ps1
+		scripts\cvs-efcoremigrations.ps1 = scripts\cvs-efcoremigrations.ps1
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CabaVS.ExpenseTracker.ArchitectureTests", "tests\CabaVS.ExpenseTracker.ArchitectureTests\CabaVS.ExpenseTracker.ArchitectureTests.csproj", "{632D5816-46E1-46B7-B5C0-7E0FF2007A2A}"
