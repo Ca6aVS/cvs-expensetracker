@@ -22,6 +22,23 @@ internal sealed class CurrencyReadRepository : ICurrencyReadRepository
         
         return allCurrencies.ToArray();
     }
-    
-    private const string CurrencyModelSelectSql = "SELECT [Id], [Name], [Code], [Symbol] FROM [dbo].[Currencies]";
+
+    public async Task<CurrencyModel?> GetById(Guid id, CancellationToken ct = default)
+    {
+        using var connection = _dbConnectionFactory.Build();
+        
+        var currency = await connection.QueryFirstOrDefaultAsync<CurrencyModel>(
+            CurrencyModelSelectByIdSql, 
+            new { CurrencyId = id });
+        
+        return currency;
+    }
+
+    private const string CurrencyModelSelectSql = 
+        "SELECT [Id], [Name], [Code], [Symbol] FROM [dbo].[Currencies]";
+    private const string CurrencyModelSelectByIdSql = 
+        """
+        SELECT [Id], [Name], [Code], [Symbol] FROM [dbo].[Currencies]
+        WHERE [Id] = @CurrencyId
+        """;
 }
