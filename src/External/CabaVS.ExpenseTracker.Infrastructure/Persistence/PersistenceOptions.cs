@@ -1,3 +1,6 @@
 namespace CabaVS.ExpenseTracker.Infrastructure.Persistence;
 
-internal sealed record PersistenceOptions(string DbConnectionString);
+internal sealed class PersistenceOptions
+{
+    public required string DbConnectionString { get; init; }
+}
