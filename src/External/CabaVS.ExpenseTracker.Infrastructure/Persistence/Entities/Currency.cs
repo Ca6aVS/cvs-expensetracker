@@ -10,6 +10,15 @@ internal sealed class Currency
     public required string Name { get; init; }
     public required string Code { get; init; }
     public required string Symbol { get; init; }
+
+    public static Currency FromDomainEntity(Domain.Entities.Currency currency) =>
+        new()
+        {
+            Id = currency.Id,
+            Name = currency.Name.Value,
+            Code = currency.Code.Value,
+            Symbol = currency.Symbol.Value
+        };
 }
 
 internal sealed class CurrencyConfiguration : IEntityTypeConfiguration<Currency>

@@ -1,3 +1,4 @@
+using CabaVS.ExpenseTracker.Application.Abstractions.Persistence;
 using CabaVS.ExpenseTracker.Application.Abstractions.Persistence.Repositories;
 using CabaVS.ExpenseTracker.Infrastructure.Persistence;
 using CabaVS.ExpenseTracker.Infrastructure.Persistence.Repositories;
@@ -24,7 +25,8 @@ public static class DependencyInjection
         serviceCollection
             .AddDbContext<ApplicationDbContext>(
                 options => options.UseSqlServer(persistenceOptions.DbConnectionString),
-                contextLifetime: ServiceLifetime.Transient);
+                contextLifetime: ServiceLifetime.Transient)
+            .AddTransient<IUnitOfWork, UnitOfWork>();
 
         return serviceCollection;
     }
