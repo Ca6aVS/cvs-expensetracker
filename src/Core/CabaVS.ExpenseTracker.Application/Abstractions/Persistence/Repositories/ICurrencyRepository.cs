@@ -6,5 +6,7 @@ namespace CabaVS.ExpenseTracker.Application.Abstractions.Persistence.Repositorie
 public interface ICurrencyRepository
 {
     Task<bool> IsExistsByName(CurrencyName name, CancellationToken ct = default);
+    Task<Currency?> GetById(Guid id, CancellationToken ct = default);
     Task Create(Currency currency, CancellationToken ct = default);
+    Task Update(Currency currency, CancellationToken ct = default);
 }

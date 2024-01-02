@@ -6,52 +6,54 @@ using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CabaVS.ExpenseTracker.Presentation.Endpoints.Currencies;
 
-internal sealed class CreateCurrencyEndpoint : Endpoint<CreateCurrencyRequest, Results<CreatedAtRoute, BadRequest<Error>>>
+internal sealed class UpdateCurrencyEndpoint : Endpoint<UpdateCurrencyRequest, Results<Ok, BadRequest<Error>>>
 {
     private readonly ISender _sender;
 
-    public CreateCurrencyEndpoint(ISender sender)
+    public UpdateCurrencyEndpoint(ISender sender)
     {
         _sender = sender;
     }
     
     public override void Configure()
     {
-        Post("api/currencies");
+        Put("api/currencies/{id:guid}");
         AllowAnonymous();
-        Options(builder => builder.WithName(nameof(CreateCurrencyEndpoint)));
+        Options(builder => builder.WithName(nameof(UpdateCurrencyEndpoint)));
     }
 
-    public override async Task<Results<CreatedAtRoute, BadRequest<Error>>> ExecuteAsync(CreateCurrencyRequest req, CancellationToken ct)
+    public override async Task<Results<Ok, BadRequest<Error>>> ExecuteAsync(UpdateCurrencyRequest req, CancellationToken ct)
     {
-        var command = new CreateCurrencyCommand(req.ModelToCreate);
+        var command = new UpdateCurrencyCommand(req.Id, req.ModelToUpdate);
 
         var result = await _sender.Send(command, ct);
 
         return result.IsSuccess 
-            ? TypedResults.CreatedAtRoute(nameof(GetCurrencyByIdEndpoint), new { Id = result.Value }) 
+            ? TypedResults.Ok() 
             : TypedResults.BadRequest(result.Error);
     }
 }
 
-internal sealed record CreateCurrencyRequest(
-    [property: FromBody] CurrencyToUpsertModel ModelToCreate);
+internal sealed record UpdateCurrencyRequest(
+    [FromRoute] Guid Id,
+    [property: FastEndpoints.FromBody] CurrencyToUpsertModel ModelToUpdate);
 
-internal sealed class CreateCurrencyEndpointSummary : Summary<CreateCurrencyEndpoint>
+internal sealed class UpdateCurrencyEndpointSummary : Summary<UpdateCurrencyEndpoint>
 {
-    public CreateCurrencyEndpointSummary()
+    public UpdateCurrencyEndpointSummary()
     {
-        Summary = Description = "Creates a new Currency.";
+        Summary = Description = "Updates an existing Currency.";
 
         ExampleRequest = new CurrencyToUpsertModel(
             Name: "Ukraine Hryvnia",
             Code: "UAH",
             Symbol: "₴");
             
-        Response(201, "Currency created successfully. Location header is filled.");
+        Response(200, "Currency updated successfully.");
         
         Response(400, "Request model didn't pass validation.",
             example: new Error("Validation.Unspecified", "Some parameters are not valid in request model."));

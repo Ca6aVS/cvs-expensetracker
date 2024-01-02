@@ -19,6 +19,14 @@ internal sealed class Currency
             Code = currency.Code.Value,
             Symbol = currency.Symbol.Value
         };
+
+    public Domain.Entities.Currency ToDomainEntity() =>
+        Domain.Entities.Currency.Create(
+            Id,
+            CurrencyName.Create(Name).Value,
+            Code,
+            Symbol,
+            true).Value;
 }
 
 internal sealed class CurrencyConfiguration : IEntityTypeConfiguration<Currency>

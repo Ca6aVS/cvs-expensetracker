@@ -9,7 +9,7 @@ using MediatR;
 namespace CabaVS.ExpenseTracker.Application.Features.Currencies.Commands;
 
 public sealed record CreateCurrencyCommand(
-    CurrencyToCreateModel ModelToCreate) : IRequest<Result<Guid>>;
+    CurrencyToUpsertModel ModelToCreate) : IRequest<Result<Guid>>;
 
 public sealed class CreateCurrencyCommandHandler : IRequestHandler<CreateCurrencyCommand, Result<Guid>>
 {

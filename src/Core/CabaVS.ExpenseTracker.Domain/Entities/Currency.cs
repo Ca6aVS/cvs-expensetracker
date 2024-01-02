@@ -40,9 +40,35 @@ public sealed class Currency : Entity
         return new Currency(id, name, codeResult.Value, symbolResult.Value);
     }
 
+    public Result Update(CurrencyName name, string code, string symbol, bool nameIsUnique)
+    {
+        var updateNameResult = UpdateName(name, nameIsUnique);
+        if (updateNameResult.IsFailure)
+        {
+            return updateNameResult.Error;
+        }
+        
+        var codeResult = CurrencyCode.Create(code);
+        if (codeResult.IsFailure)
+        {
+            return codeResult.Error;
+        }
+
+        var symbolResult = CurrencySymbol.Create(symbol);
+        if (symbolResult.IsFailure)
+        {
+            return symbolResult.Error;
+        }
+        
+        Code = codeResult.Value;
+        Symbol = symbolResult.Value;
+
+        return Result.Success();
+    }
+    
     public Result UpdateName(CurrencyName name, bool nameIsUnique)
     {
-        if (name != Name && !nameIsUnique)
+        if (!nameIsUnique)
         {
             return CurrencyErrors.NameTaken(name);
         }
